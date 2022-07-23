@@ -1,16 +1,25 @@
-import axios from "axios";
-
 class UserClient {
   constructor() {
     this.url = "http://localhost:3042/users";
   }
 
   async login(userName, password) {
-    const response = await axios.post(`${this.url}/login`, {
-      userName,
-      password,
+    console.log(userName, password);
+    const response = await fetch(`${this.url}/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userName, password }),
     });
-    return response.data;
+    if (response.status === 200) {
+      const res = await response.json();
+      return res.userName;
+    } else if (response.status === 401) {
+      return "Invalid password";
+    } else if (response.status === 404) {
+      return "User not found";
+    }
   }
 
   async register(user) {

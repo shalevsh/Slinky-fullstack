@@ -1,6 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import userClient from "../../Services/userClient";
 
 const LoginForm = () => {
+  const [username, setUsername] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await userClient.login(
+      e.target.username.value,
+      e.target.password.value
+    );
+    if (res) {
+      setUsername(res);
+    }
+  };
+
   return (
     <div className="login-form">
       <div className="login-form-container">
@@ -8,10 +22,10 @@ const LoginForm = () => {
           <h1>Login</h1>
         </div>
         <div className="login-form-body">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="login-form-input-container">
-              <label htmlFor="email">Email</label>
-              <input type="text" id="email" />
+              <label htmlFor="email">Username</label>
+              <input type="text" id="username" />
             </div>
             <div className="login-form-input-container">
               <label htmlFor="password">Password</label>
@@ -22,6 +36,9 @@ const LoginForm = () => {
             </div>
           </form>
         </div>
+      </div>
+      <div>
+        <h1>{username}</h1>
       </div>
     </div>
   );
