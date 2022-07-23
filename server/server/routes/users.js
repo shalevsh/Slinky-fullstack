@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const usersManager = require("../services/usersManager");
 const router = express.Router();
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
   const { userName, password, firstName, lastName, email, company, isAdmin } =
@@ -24,7 +25,12 @@ router.post("/register", async (req, res) => {
           company,
           isAdmin
         );
-        res.status(201).send(newUser);
+        const token = jwt.sign(
+          { userName: user.userName, isAdmin: user.isAdmin },
+          "jwtPrivateKey"
+        );
+        console.log(token);
+        res.status(200).send({ user: newUser, token: token });
       }
     });
   }
@@ -39,7 +45,11 @@ router.post("/login", async (req, res) => {
       if (err) {
         res.status(500).send(err);
       } else if (result) {
-        res.status(200).send(user);
+        const token = jwt.sign(
+          { userName: user.userName, isAdmin: user.isAdmin },
+          "jwtPrivateKey"
+        );
+        res.status(200).send({ user: user, token: token });
       } else {
         res.status(401).send("Invalid password");
       }

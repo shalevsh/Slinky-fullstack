@@ -13,8 +13,12 @@ class UserClient {
       body: JSON.stringify({ userName, password }),
     });
     if (response.status === 200) {
+      //get x-auth-token from response
       const res = await response.json();
-      return res.userName;
+      console.log(res);
+      //need to save the JWT token in local storage
+      localStorage.setItem("x-auth-token", res.token);
+      return res.user.userName;
     } else if (response.status === 401) {
       return "Invalid password";
     } else if (response.status === 404) {
