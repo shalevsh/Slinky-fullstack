@@ -42,7 +42,14 @@ class UserClient {
         isAdmin: user.isAdmin,
       }),
     });
-    return response.json();
+    if (response.status === 200) {
+      const res = await response.json();
+      console.log(res);
+      localStorage.setItem("x-auth-token", res.token);
+      return true; //Temporary - need to implement a login after register and pass to landing page
+    } else if (response.status === 400) {
+      return "User already exists";
+    }
   }
 }
 
