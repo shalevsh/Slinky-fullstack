@@ -27,7 +27,8 @@ router.post("/register", async (req, res) => {
         );
         const token = jwt.sign(
           { userName: user.userName, isAdmin: user.isAdmin },
-          "jwtPrivateKey"
+          "jwtPrivateKey",
+          { expiresIn: "24h" }
         );
         console.log(token);
         res.status(200).send({ user: newUser, token: token });
@@ -47,7 +48,8 @@ router.post("/login", async (req, res) => {
       } else if (result) {
         const token = jwt.sign(
           { userName: user.userName, isAdmin: user.isAdmin },
-          "jwtPrivateKey"
+          "jwtPrivateKey",
+          { expiresIn: "24h" }
         );
         res.status(200).send({ user: user, token: token });
       } else {
