@@ -2,7 +2,7 @@ import axios from "axios";
 
 class UserClient {
   constructor() {
-    this.url = "http://localhost:30042/users";
+    this.url = "http://localhost:3042/users";
   }
 
   async login(userName, password) {
@@ -13,15 +13,24 @@ class UserClient {
     return response.data;
   }
 
-  async register(userName, password, firstName, lastName, email, company) {
-    const response = await axios.post(`${this.url}/register`, {
-      userName,
-      password,
-      firstName,
-      lastName,
-      email,
-      company,
+  async register(user) {
+    const response = await fetch(`${this.url}/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        userName: user.userName,
+        password: user.password,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        company: user.company,
+        isAdmin: user.isAdmin,
+      }),
     });
-    return response.data;
+    return response.json();
   }
 }
+
+export default new UserClient();

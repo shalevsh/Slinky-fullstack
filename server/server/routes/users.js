@@ -1,7 +1,7 @@
 const express = require("express");
-const router = express.Router();
 const bcrypt = require("bcrypt");
-const { default: usersManager } = require("../services/usersManager");
+const usersManager = require("../services/usersManager");
+const router = express.Router();
 
 router.post("/register", async (req, res) => {
   const { userName, password, firstName, lastName, email, company, isAdmin } =
@@ -10,10 +10,10 @@ router.post("/register", async (req, res) => {
   if (user) {
     res.status(400).send("User already exists");
   } else {
-    const hash = await bcrypt.hash(password, 10);
+    //const hash = await bcrypt.hash(password, 10);
     const newUser = await usersManager.createUser(
       userName,
-      hash,
+      password,
       firstName,
       lastName,
       email,
@@ -39,4 +39,4 @@ router.post("/login", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
