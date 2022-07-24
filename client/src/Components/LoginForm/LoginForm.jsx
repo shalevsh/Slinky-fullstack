@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import userClient from "../../Services/userClient";
+import "./loginForm.css";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -32,7 +33,9 @@ const LoginForm = () => {
               <input type="password" id="password" />
             </div>
             <div className="login-form-input-container">
-              <button type="submit">Login</button>
+              <button className="btn login-btn" type="submit">
+                Login
+              </button>
             </div>
           </form>
         </div>

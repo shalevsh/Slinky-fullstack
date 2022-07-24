@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import LoginForm from "./Components/LoginForm/LoginForm";
+import Login from "./Pages/Login/Login";
 import SignUpForm from "./Components/SignUpForm/SignUpForm";
 import Navbar from "./Components/Generics/NavBar/NavBar";
 import NotFound from "./Pages/NotFound/NotFound";
@@ -14,9 +14,9 @@ const App = () => {
         <Navbar />
         <div className="container">
           <Routes>
-            <Route path="/" element={<LoginForm />} />
+            <Route path="/" element={<Login />} />
             <Route path="/signup" element={<SignUpForm />} />
-            <Route path="/login" element={<LoginForm />} />
+            <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
