@@ -4,36 +4,48 @@ import userClient from "../../Services/userClient";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loginRes, setloginRes] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await userClient.login(
-      e.target.username.value,
-      e.target.password.value
-    );
+    console.log(username, password);
+    const res = await userClient.login(username, password);
     if (res) {
-      setUsername(res);
+      setloginRes(res);
     }
   };
 
   return (
-    <div className="center">
+    <div className="center login-center">
       <h1>Login</h1>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="txt_field">
-          <input type="text" required />
+          <input
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
           <span></span>
           <label>Username</label>
         </div>
         <div className="txt_field">
-          <input type="password" required />
+          <input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
           <span></span>
           <label>Password</label>
         </div>
-        <input type="submit" value="Login" onClick={handleSubmit} />
+        <input type="submit" />
       </form>
       <div>
-        <h1>{username}</h1>
+        {loginRes && (
+          <div>
+            <h2>{loginRes}</h2>
+          </div>
+        )}
       </div>
     </div>
   );

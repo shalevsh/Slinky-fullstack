@@ -3,7 +3,7 @@ import "./signUpForm.css";
 
 const signUpForm = () => {
   return (
-    <div className="center">
+    <div className="signup-center">
       <h1>SignUp</h1>
       <form>
         <div className="txt_field">

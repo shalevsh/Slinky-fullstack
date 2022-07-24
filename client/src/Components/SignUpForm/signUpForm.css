@@ -1,4 +1,4 @@
-.center{
+.signup-center{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,12 +9,12 @@
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
   }
-  .center h1{
+  .signup-center h1{
     text-align: center;
     padding: 20px 0;
     border-bottom: 1px solid silver;
   }
-  .center form{
+  .signup-center form{
     padding: 0 40px;
     box-sizing: border-box;
   }
