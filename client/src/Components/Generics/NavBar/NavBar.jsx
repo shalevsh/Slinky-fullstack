@@ -22,6 +22,11 @@ function Navbar() {
               SignUp
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink to="/booking" className={"nav-links"}>
+              booking
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>

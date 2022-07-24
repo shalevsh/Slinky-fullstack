@@ -18,6 +18,7 @@ const App = () => {
             <Route path="/signup" element={<SignUpForm />} />
             <Route path="/login" element={<LoginForm />} />
             <Route path="*" element={<NotFound />} />
+            <Route path="/booking" element={<bookinForm />} />
           </Routes>
         </div>
       </div>
