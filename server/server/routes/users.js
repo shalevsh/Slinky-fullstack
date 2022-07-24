@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const usersManager = require("../services/usersManager");
 const router = express.Router();
-const session = require("express-session");
 const jwt = require("jsonwebtoken");
 
 router.post("/register", async (req, res) => {
@@ -26,7 +25,11 @@ router.post("/register", async (req, res) => {
           isAdmin
         );
         const token = jwt.sign(
-          { userName: user.userName, isAdmin: user.isAdmin },
+          {
+            userId: newUser.id,
+            userName: newUser.userName,
+            isAdmin: newUser.isAdmin,
+          },
           "jwtPrivateKey",
           { expiresIn: "24h" }
         );
@@ -46,8 +49,9 @@ router.post("/login", async (req, res) => {
       if (err) {
         res.status(500).send(err);
       } else if (result) {
+        console.log(user);
         const token = jwt.sign(
-          { userName: user.userName, isAdmin: user.isAdmin },
+          { userId: user.id, userName: user.userName, isAdmin: user.isAdmin },
           "jwtPrivateKey",
           { expiresIn: "24h" }
         );
