@@ -1,62 +1,62 @@
 const BookingManager = require('../../services/booking/bookingManager');
 
-async function createBooking(req, res, next){
+async function createBooking(req, res){
     try{
         const returnedBooking = await BookingManager.addBookingOrder(req.body.bookingInformation, req.tokenData.userName);
         res.status(200).send(JSON.stringify(returnedBooking));
         res.end();
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function getAllBookings(req, res, next){
+async function getAllBookings(req, res){
     try{
         const listToReturn = await BookingManager.getAllBookings();
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function getBookingsOfUser(req, res, next){
+async function getBookingsOfUser(req, res){
     try{
         const listToReturn = await BookingManager.getBookingsOfUser(req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function deleteBooking(req, res, next){
+async function deleteBooking(req, res){
     try{
         const listToReturn = await BookingManager.deleteBooking(req.body.bookingId, req.body.officeId, req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function updateBooking(req, res, next){
+async function updateBooking(req, res){
     try{
         const listToReturn = await BookingManager.updateBooking(req.body.bookingInformation, req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function getBookingByBookingPlace(req, res, next){
+async function getBookingByBookingPlace(req, res){
     try{
         const listToReturn = await BookingManager.getBookingByPlaceArea(req.body.bookingPlace);
         console.log(listToReturn);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
-async function getBookingByDateAndPlace(req, res, next){
+async function getBookingByDateAndPlace(req, res){
     try{
         const { officeId, bookingPlace, startDate, endDate } = req.body;
         const listOfBookings = await BookingManager.getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate);
@@ -66,7 +66,7 @@ async function getBookingByDateAndPlace(req, res, next){
         })
         res.status(200).send(JSON.stringify(bookedHours));
     } catch(error){
-        // next(error);
+        res.status(error.statusCode).send(JSON.stringify(error.message));
     }
 }
 
@@ -80,18 +80,17 @@ module.exports = {
     getBookingByDateAndPlace
 }
 
-let endDate = "2022-07-25";
-let startDate = "2022-07-25";
+// let endDate = "2022-07-25";
+// let startDate = "2022-07-25";
 
-const bookingInformation = {
-    officeId:"1",
-    bookingPlace: "c5", 
-    userName:"viko",
-    startDate:new Date(startDate) ,
-    endDate:new Date(new Date(endDate).getTime() + 60 * 60 * 22 * 1000 - 1)
-    }
-const req = {body:{"bookingInformation":bookingInformation}}
-const req2 = {body:{"officeId":1, "bookingPlace":"c5", startDate:new Date(endDate),
-endDate:new Date(endDate).getTime() + 60 * 60 * 24 * 1000 - 1}}
+// const bookingInformation = {
+//     officeId:"3",
+//     bookingPlace: "c5", 
+//     startDate:new Date(startDate) ,
+//     endDate:new Date(new Date(endDate).getTime() + 60 * 60 * 22 * 1000 - 1)
+//     }
+// const req = {body:{"bookingInformation":bookingInformation}}
+// const req2 = {body:{"officeId":1, "bookingPlace":"c5", startDate:new Date(endDate),
+// endDate:new Date(endDate).getTime() + 60 * 60 * 24 * 1000 - 1}}
 // createBooking(req);
-getBookingByDateAndPlace(req2);
+// getBookingByDateAndPlace(req2);

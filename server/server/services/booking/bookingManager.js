@@ -10,7 +10,9 @@ class BookingManager {
     if (
       this.bookingManagerValidator.isBookingInformationValid(bookingInformation) === false
     ) {
-      throw error("In the time"); //need to choose what to do here
+      const newError = Error("parameters are not good");
+      newError.statusCode = 400;
+      throw newError;
     }
     const { officeId, bookingPlace, startDate, endDate } = bookingInformation;
     const bookOrder = await this.bookingDatabase.addBooking(officeId, bookingPlace, userName, startDate, endDate);
@@ -27,7 +29,9 @@ class BookingManager {
   }
   async updateBooking(bookingInformation, userName) {
     if (this.bookingManagerValidator.isBookingInformationValid(bookingInformation) === false) {
-      throw error("In the time"); //need to choose what to do here
+        const newError = Error("parameters are not good");
+        newError.statusCode = 400;
+        throw newError;
     }
     const { bookingId, officeId, bookingPlace, startDate, endDate } = bookingInformation;
     await this.bookingDatabase.updateBooking(bookingId, officeId, bookingPlace, userName, startDate, endDate, userName);
