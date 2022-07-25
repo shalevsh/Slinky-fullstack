@@ -10,7 +10,8 @@ class BookingManagerValidator{
         return true;
     }
     _isInputBlank(str) {
-        return (!str || this.isWhiteSpacesOnlyRegex.test(str));
+        const isWhiteSpacesOnlyRegex = /^\s*$/;
+        return (!str || isWhiteSpacesOnlyRegex.test(str));
     }
     _isNotNumber(value){
         return isNaN(Number(value))
@@ -18,7 +19,7 @@ class BookingManagerValidator{
     _isBookingPlaceNotValid(bookingPlace){
         if(this._isInputBlank(bookingPlace)) return true;
         const book = bookingPlace.split(" ");
-        if(book[0] !== "chair" || book[0] !== "room") return true;
+        if(book[0] !== "chair" && book[0] !== "room") return false;
         if(this._isNotNumber(book[1])) return true;
         return false;
     }
