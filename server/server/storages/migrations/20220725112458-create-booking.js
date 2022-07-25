@@ -14,9 +14,6 @@ module.exports = {
       bookingPlace: {
         type: Sequelize.STRING
       },
-      bookingFloor: {
-        type: Sequelize.INTEGER
-      },
       userName: {
         type: Sequelize.STRING
       },

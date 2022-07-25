@@ -1,10 +1,9 @@
 class BookingManagerValidator{
     constructor(){}
     isBookingInformationValid(bookingInformation){
-        const { officeId, bookingPlace, bookingFloor, startDate, endDate } = bookingInformation;
+        const { officeId, bookingPlace, startDate, endDate } = bookingInformation;
         if(this._isNotNumber(officeId)) return false;
         if(this._isBookingPlaceNotValid(bookingPlace)) return false;
-        if(this._isNotNumber(bookingFloor)) return false;
         if(this._isDateTimeNotValid(startDate)) return false;
         if(this._isDateTimeNotValid(endDate)) return false;
         return true;
@@ -17,10 +16,8 @@ class BookingManagerValidator{
         return isNaN(Number(value))
     }
     _isBookingPlaceNotValid(bookingPlace){
-        if(this._isInputBlank(bookingPlace)) return true;
-        const book = bookingPlace.split(" ");
-        if(book[0] !== "chair" && book[0] !== "room") return false;
-        if(this._isNotNumber(book[1])) return true;
+        if(bookingPlace[0] !== "c" && bookingPlace[0] !== "o") return true;
+        if(this._isNotNumber(bookingPlace[1])) return true;
         return false;
     }
     _isDateTimeNotValid(date){

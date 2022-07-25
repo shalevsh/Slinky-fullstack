@@ -8,14 +8,12 @@ class BookingManager {
   }
   async addBookingOrder(bookingInformation, userName) {
     if (
-      this.bookingManagerValidator.isBookingInformationValid(
-        bookingInformation
-      ) === false
+      this.bookingManagerValidator.isBookingInformationValid(bookingInformation) === false
     ) {
       throw error("In the time"); //need to choose what to do here
     }
-    const { officeId, bookingPlace, bookingFloor, startDate, endDate } = bookingInformation;
-    const bookOrder = await this.bookingDatabase.addBooking(officeId, bookingPlace, bookingFloor, userName, startDate, endDate);
+    const { officeId, bookingPlace, startDate, endDate } = bookingInformation;
+    const bookOrder = await this.bookingDatabase.addBooking(officeId, bookingPlace, userName, startDate, endDate);
     return bookOrder;
   }
   async getBookingsOfUser(userName) {
@@ -32,6 +30,12 @@ class BookingManager {
       throw error("In the time"); //need to choose what to do here
     }
     await this.bookingDatabase.updateBooking(bookingInformation, userName);
+  }
+  async getBookingByPlaceArea(bookingPlace){
+    return await this.bookingDatabase.getBookingByPlaceArea(bookingPlace);
+  }
+  async getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate){
+    return await this.bookingDatabase.getBookingByDateAndPlace(officeId, bookingPlace, startDate, endDate);
   }
 }
 
