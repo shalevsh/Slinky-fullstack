@@ -1,0 +1,67 @@
+/* body{
+background-image:url("./large-regular-office-floor-plan.png");
+} */
+#mapBackGround{
+background-image:url("./large-regular-office-floor-plan.png");
+height: 635px;
+width: 660px;
+}
+#c1{
+    position: absolute;
+    top: 330px;
+    left: 270px;
+}
+#c2{
+    position: absolute;
+    top: 420px;
+    left: 270px;
+}
+
+#c3{
+    position: absolute;
+    top: 510px;
+    left: 270px;
+}
+
+#c4{
+    position: absolute;
+    top: 600px;
+    left: 270px;
+}
+#c5{
+    position: absolute;
+    top: 330px;
+    left: 400px;
+}
+#c6{
+    position: absolute;
+    top: 420px;
+    left: 400px;
+}
+
+#c7{
+    position: absolute;
+    top: 510px;
+    left: 400px;
+}
+
+#c8{
+    position: absolute;
+    top: 600px;
+    left: 400px;
+}
+.container .btn {
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: #555;
+    color: white;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .container .btn:hover {
+    background-color: black;
+  }
