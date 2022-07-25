@@ -22,14 +22,15 @@ class BookingManager {
   async getAllBookings() {
     return await this.bookingDatabase.getAllBookings();
   }
-  async deleteBooking(bookingId, officeId) {
-    await this.bookingDatabase.deleteBooking(bookingId, officeId);
+  async deleteBooking(bookingId, officeId, userName) {
+    await this.bookingDatabase.deleteBooking(bookingId, officeId, userName);
   }
   async updateBooking(bookingInformation, userName) {
     if (this.bookingManagerValidator.isBookingInformationValid(bookingInformation) === false) {
       throw error("In the time"); //need to choose what to do here
     }
-    await this.bookingDatabase.updateBooking(bookingInformation, userName);
+    const { bookingId, officeId, bookingPlace, startDate, endDate } = bookingInformation;
+    await this.bookingDatabase.updateBooking(bookingId, officeId, bookingPlace, userName, startDate, endDate, userName);
   }
   async getBookingByPlaceArea(bookingPlace){
     return await this.bookingDatabase.getBookingByPlaceArea(bookingPlace);

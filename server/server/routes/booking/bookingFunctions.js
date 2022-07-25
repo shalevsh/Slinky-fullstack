@@ -2,7 +2,7 @@ const BookingManager = require('../../services/booking/bookingManager');
 
 async function createBooking(req, res, next){
     try{
-        const returnedBooking = await BookingManager.addBookingOrder(req.body.bookingInformation);
+        const returnedBooking = await BookingManager.addBookingOrder(req.body.bookingInformation, req.tokenData.userName);
         res.status(200).send(JSON.stringify(returnedBooking));
         res.end();
     } catch(error){
@@ -21,7 +21,7 @@ async function getAllBookings(req, res, next){
 
 async function getBookingsOfUser(req, res, next){
     try{
-        const listToReturn = await BookingManager.getBookingsOfUser(req.body.user.userName);
+        const listToReturn = await BookingManager.getBookingsOfUser(req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
         // next(error);
@@ -30,7 +30,7 @@ async function getBookingsOfUser(req, res, next){
 
 async function deleteBooking(req, res, next){
     try{
-        const listToReturn = await BookingManager.deleteBooking(req.body.bookingId, req.body.officeId);
+        const listToReturn = await BookingManager.deleteBooking(req.body.bookingId, req.body.officeId, req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
         // next(error);
@@ -39,7 +39,7 @@ async function deleteBooking(req, res, next){
 
 async function updateBooking(req, res, next){
     try{
-        const listToReturn = await BookingManager.updateBooking(req.body.bookingInformation);
+        const listToReturn = await BookingManager.updateBooking(req.body.bookingInformation, req.tokenData.userName);
         res.status(200).send(JSON.stringify(listToReturn));
     } catch(error){
         // next(error);
